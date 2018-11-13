@@ -1,11 +1,10 @@
-TASK_TIME_PROMPT = "Time Spent (minutes): "
-
+TASK_TIME = "Time Spent (minutes): "
 
 
 def task_minutes():
     """Prompt user for task time and return user input"""
     while True:
-        time_input = input(TASK_TIME_PROMPT)
+        time_input = input(TASK_TIME)
         try:
             float(time_input)
         except ValueError:

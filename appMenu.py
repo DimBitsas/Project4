@@ -1,9 +1,9 @@
 import os
 import sys
 import time
-from task import add_task
-from task import init_task_db
-from task import task_search_name
+from task import add_task, init_task_db
+from task import search_task_by_name, search_task_by_time, search_task_by_date, search_task_by_term
+from task import show_search_results, clear_results_list
 
 MAIN_MENU = "WORK_LOG\na) Add new entry\nb) Search in existing entries\nc) Quit program"
 SEARCH = "\nDo you want to search by: \na) Find by employee name\nb) " \
@@ -20,19 +20,22 @@ def tasks_search():
     """
     while True:
         clear_screen()
+        clear_results_list()
         user_input = input(SEARCH).upper()
         if user_input == 'E':
             return
         elif user_input == 'A':
-            task_search_name("nikos")
+            search_task_by_name()
         elif user_input == 'B':
-            print("date search")
+            search_task_by_date()
         elif user_input == 'C':
-            print("time serach")
+            search_task_by_time()
         elif user_input == 'D':
-            print("teram search")
+            search_task_by_term()
         else:
             print(TRY_AGAIN)
+            continue
+        show_search_results()
 
 def app_menu():
     """Application menu"""
