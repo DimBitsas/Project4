@@ -2,12 +2,12 @@ import os
 import sys
 import time
 from task import add_task, init_task_db
-from task import search_task_by_name, search_task_by_time, search_task_by_date, search_task_by_term
-from task import show_search_results, clear_results_list
+from task import search_task_by_emp, search_task_by_time, search_task_by_date, search_task_by_term, search_task_by_date_range
+from task import show_search_results, clear_results_list, show_emp, show_dates
 
 MAIN_MENU = "WORK_LOG\na) Add new entry\nb) Search in existing entries\nc) Quit program"
 SEARCH = "\nDo you want to search by: \na) Find by employee name\nb) " \
-"Find by date\nc) Find by time spent\nd) Find by search term\ne) Return to menu\n\n"
+"Find by date\nc) Find by time spent\nd) Find by search term\ne) Find by range of dates\nf) Return to menu\n\n"
 TRY_AGAIN = "Please provide a valid input\nTry again!!\n\n"
 
 
@@ -22,16 +22,20 @@ def tasks_search():
         clear_screen()
         clear_results_list()
         user_input = input(SEARCH).upper()
-        if user_input == 'E':
+        if user_input == 'F':
             return
         elif user_input == 'A':
-            search_task_by_name()
+            show_emp()
+            search_task_by_emp()
         elif user_input == 'B':
+            show_dates()
             search_task_by_date()
         elif user_input == 'C':
             search_task_by_time()
         elif user_input == 'D':
             search_task_by_term()
+        elif user_input == 'E':
+            search_task_by_date_range()
         else:
             print(TRY_AGAIN)
             continue
