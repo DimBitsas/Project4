@@ -1,9 +1,8 @@
 import os
 import sys
 import time
-from task import add_task, init_task_db
-from task import search_task_by_emp, search_task_by_time, search_task_by_date, search_task_by_term, search_task_by_date_range
-from task import show_search_results, clear_results_list, show_emp, show_dates
+from task import add_task, init_task_db, db
+from task_search import EmpSearch, DateSearch, TimeSearch, TermSearch, DateRangeSearch
 
 MAIN_MENU = "WORK_LOG\na) Add new entry\nb) Search in existing entries\nc) Quit program"
 SEARCH = "\nDo you want to search by: \na) Find by employee name\nb) " \
@@ -20,26 +19,22 @@ def tasks_search():
     """
     while True:
         clear_screen()
-        clear_results_list()
         user_input = input(SEARCH).upper()
         if user_input == 'F':
             return
         elif user_input == 'A':
-            show_emp()
-            search_task_by_emp()
+            EmpSearch().search()
         elif user_input == 'B':
-            show_dates()
-            search_task_by_date()
+            DateSearch().search()
         elif user_input == 'C':
-            search_task_by_time()
+            TimeSearch().search()
         elif user_input == 'D':
-            search_task_by_term()
+            TermSearch().search()
         elif user_input == 'E':
-            search_task_by_date_range()
+            DateRangeSearch().search()
         else:
             print(TRY_AGAIN)
             continue
-        show_search_results()
 
 def app_menu():
     """Application menu"""
@@ -52,6 +47,7 @@ def app_menu():
         elif prompt_res == 'B':
             tasks_search()
         elif prompt_res == 'C':
+            db.close()
             sys.exit()
         else:
             print("Error: Please provide a valid input: a,b or c\n\n")
