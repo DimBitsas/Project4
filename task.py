@@ -1,5 +1,4 @@
 from peewee import *
-from prompts import *
 
 db = SqliteDatabase('task db')
 
@@ -14,14 +13,10 @@ class Task(Model):
         database = db
 
 def init_task_db():
+    """Connect to the database"""
     db.connect()
     db.create_tables([Task], safe=True)
         
-def add_task():
-    t_date = get_user_date()
-    e_name = input(NAME).strip()
-    t_name = input(TASK_NAME).strip()
-    t_time = task_minutes()
-    t_notes = input(NOTES).strip()
-    
-    Task.create(task_date=t_date, employee_name=e_name, task_name=t_name, task_time=t_time, task_notes=t_notes )
+def add_task(t_date, e_name, t_name, t_time, t_notes):
+    """Add new task"""
+    return Task.create(task_date=t_date, employee_name=e_name, task_name=t_name, task_time=t_time, task_notes=t_notes )
